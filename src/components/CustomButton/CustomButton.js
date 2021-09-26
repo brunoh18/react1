@@ -6,16 +6,28 @@ import ImagemGato from '../../assets/gato.jpg'
 export default function Home() {
 
   const [teste, setTeste] = useState(0)
+  const [Nome, setNome] = useState('')
+
+  const getContent = () => {
+    getData()
+    .then(response=> {
+      setNome(response.data)
+    } )
+    .catch()
+  }
 
   return (
-    <TouchableOpacity onPress={() => setTeste(teste+1)}>
+    <>
+    <TouchableOpacity onPress={() => getContent()}>
       <ImageBackground source={ ImagemGato } style={ styles.imgStyle }>
-        <View style={styles.container}>
-          <Text>Cliques {teste}</Text>
+        {Nome && (<View style={styles.container}>
+          <Text>Nome do usuario {Nome === ''? 'Sem nome' :Nome }</Text>
           <StatusBar style="auto" />
-        </View>
+        </View>)}
+        {function()}
       </ImageBackground>
     </TouchableOpacity>
+    </>
   );
 }
 
